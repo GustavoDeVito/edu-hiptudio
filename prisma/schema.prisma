@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model album {
+  ID_album        Int     @id @default(autoincrement())
+  nome            String? @db.VarChar(255)
+  capa            String? @db.Text
+  produtor        String? @db.Text
+  fk_TipoContrato Int?
+  fk_Cliente      Int?
+
+  @@index([fk_Cliente], map: "fk_Cliente")
+  @@index([fk_TipoContrato], map: "fk_TipoContrato")
+}
+
+model cliente {
+  ID_cliente     Int     @id @default(autoincrement())
+  telefone       String? @db.Text
+  email          String? @db.Text
+  senha          String? @db.Text
+  nome           String? @db.Text
+  genero_musical String? @db.Text
+}
+
+model contrato {
+  ID_contrato       Int       @id @default(autoincrement())
+  data_contrato     DateTime? @db.Date
+  duracao_semestres Int?
+  fk_TipoContrato   Int?
+  valor             Int?
+  fk_Cliente        Int?
+
+  @@index([fk_Cliente], map: "fk_Cliente")
+  @@index([fk_TipoContrato], map: "fk_TipoContrato")
+}
+
+model distribuicao {
+  ID_Distribuicao  Int  @id @default(autoincrement())
+  fk_distribuidora Int?
+  fk_tipoContrato  Int?
+
+  @@index([fk_distribuidora], map: "fk_distribuidora")
+  @@index([fk_tipoContrato], map: "fk_tipoContrato")
+}
+
+model distribuidora {
+  ID_distribuidora Int     @id @default(autoincrement())
+  nome             String? @db.Text
+  plataforma       String? @db.VarChar(255)
+}
+
+model letra {
+  ID_letra        Int     @id @default(autoincrement())
+  conteudo        String? @db.Text
+  titulo          String? @db.VarChar(255)
+  fk_TipoContrato Int?
+  fk_Cliente      Int?
+
+  @@index([fk_Cliente], map: "fk_Cliente")
+  @@index([fk_TipoContrato], map: "fk_TipoContrato")
+}
+
+model musica {
+  ID_musica       Int     @id @default(autoincrement())
+  nome            String? @db.VarChar(255)
+  feats           String? @db.Text
+  fk_album        Int?
+  letra           String? @db.Text
+  fk_TipoContrato Int?
+  fk_Cliente      Int?
+
+  @@index([fk_Cliente], map: "fk_Cliente")
+  @@index([fk_TipoContrato], map: "fk_TipoContrato")
+  @@index([fk_album], map: "fk_album")
+}
+
+model shows {
+  ID_shows        Int       @id @default(autoincrement())
+  horario         String?   @db.Text
+  data_show       DateTime? @db.Date
+  cidade_endereco String?   @db.Text
+  CEP_endereco    String?   @db.Text
+  rua_endereco    String?   @db.Text
+  numero_endereco String?   @db.Text
+  titulo          String?   @db.VarChar(255)
+  fk_TipoContrato Int?
+  fk_Cliente      Int?
+
+  @@index([fk_Cliente], map: "fk_Cliente")
+  @@index([fk_TipoContrato], map: "fk_TipoContrato")
+}
+
+model tipocontrato {
+  ID_tipoContrato Int      @id @default(autoincrement())
+  nome            String?  @db.VarChar(255)
+  can_music       Boolean?
+  can_shows       Boolean?
+  can_albun       Boolean?
+  can_letra       Boolean?
+}

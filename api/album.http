@@ -1,0 +1,32 @@
+### FindAll
+GET http://localhost:3000/albums HTTP/1.1
+
+### FindOne
+GET http://localhost:3000/albums/id HTTP/1.1
+
+### Create
+POST http://localhost:3000/albums HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "",
+    "capa": "",
+    "produtor": "",
+    "fk_TipoContrato": 0,
+    "fk_Cliente": 0
+}
+
+### Update
+PATCH http://localhost:3000/albums/id HTTP/1.1
+Content-Type: application/json
+
+{
+    "nome": "",
+    "capa": "",
+    "produtor": "",
+    "fk_TipoContrato": 0,
+    "fk_Cliente": 0
+}
+
+### Delete
+DELETE http://localhost:3000/albums/id HTTP/1.1

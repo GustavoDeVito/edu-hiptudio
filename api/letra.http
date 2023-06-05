@@ -1,0 +1,30 @@
+### FindAll
+GET http://localhost:3000/letras HTTP/1.1
+
+### FindOne
+GET http://localhost:3000/letras/1 HTTP/1.1
+
+### Create
+POST http://localhost:3000/letras HTTP/1.1
+Content-Type: application/json
+
+{
+    "conteudo": "Lorem",
+    "titulo": "plat",
+    "fk_TipoContrato": 1,
+    "fk_Cliente": 2
+}
+
+### Update
+PATCH http://localhost:3000/letras/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "conteudo": "Lorem",
+    "titulo": "plat",
+    "fk_TipoContrato": 1,
+    "fk_Cliente": 2
+}
+
+### Delete
+DELETE http://localhost:3000/letras/1 HTTP/1.1
