@@ -1,2 +1,2 @@
 
-# hiptudio# edu-hiptudio
+# hiptudio
